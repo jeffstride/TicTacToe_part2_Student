@@ -65,18 +65,20 @@ method implementation to an interface of some manufactured object.
 ## Keyboard Functionality
 You can allow the user to type in a number/letter that represent a location
 on the board. For example:
-
-    * A | B | C       1 | 2 | 3
-    * ---------       ---------
-    * D | E | F       4 | 5 | 6
-    * ---------       ---------
-    * G | H | I       7 | 8 | 9
+```
+     A | B | C       1 | 2 | 3
+     ---------       ---------
+     D | E | F       4 | 5 | 6
+     ---------       ---------
+     G | H | I       7 | 8 | 9
+```
 
 ## class TicTacToe
 The TicTacToe class is the main driver of the TicTacToe game.
 It will create an instance of itself and whatever other classes it needs.
 <p>
-Responsibilities:
+   
+Responsibilities:   
 * Create supporting classes such as Board and MenuDrawingPanel
 * Enforce the rules of TicTacToe with the help of the Board
 * Keeps track of whose turn it is
@@ -208,7 +210,7 @@ Of course, you could use the more verbose methods presented above. You can creat
 2. Add a mouse listener to the panel. This means that you'd have to create a MouseListener
 interface implementation in the same way you might implement KeyListener mentioned above.
 The code for doing an inline, anonymous class would look like this:
-
+```
       panel.addMouseListener(new MouseListener() {
     	  @Override
     	  public void mouseEntered(MouseEvent e) {
@@ -233,3 +235,4 @@ The code for doing an inline, anonymous class would look like this:
     		  // do something
     	  }
       });
+```
