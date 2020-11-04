@@ -18,6 +18,7 @@ Additional classes should be added to reduce the complexity of
 it all as well as to **REUSE** code from prior work completed. 
 For example, a Board class would be appropriate. <p>
 Suggested Steps are:
+   
 1. Draw a TicTacToe board in the DrawingPane
 2. Modify/add custom menu options to the Frame
 3. Hook up event handler for custom menu
@@ -61,7 +62,7 @@ is not really an object in and of itself. It is the implementation of the
 only method in the interface. The compiler does some trickery to tie the
 method implementation to an interface of some manufactured object.
 
-##Keyboard Functionality
+## Keyboard Functionality
 You can allow the user to type in a number/letter that represent a location
 on the board. For example:
 
