@@ -140,40 +140,49 @@ into the constructor of the MenuDrawingPanel.
 ### 5 Ways to create an ActionListener
 1. Create a separate class that implements ActionListener. Then, pass
 in the reference to an instance of that object.
-
-     this.myListener = new MyListener();
-     panel = new MenuDrawingPanel(600, 600, this.myListener);
+```
+   this.myListener = new MyListener();
+   panel = new MenuDrawingPanel(600, 600, this.myListener);
+```
 
 2. Have the TicTacToe class implement ActionListener directly. Then...
-
-     panel = new MenuDrawingPanel(600, 600, this);
+```
+   panel = new MenuDrawingPanel(600, 600, this);
+```
 
 3. Create a method that has the same signature of the only method in ActionListener. Note that the interface definition is:
-
-     interface ActionListener { public void actionPerformed(ActionEvent e); }
+```
+   interface ActionListener { public void actionPerformed(ActionEvent e); }
+```
 
 So, you'd create a method with the same signature, such as:<br>
-
-     public void myHandler(ActionEvent e) {
+```
+   public void myHandler(ActionEvent e) {
+```
 
 Then you use the method pointer when create the MenuDrawingPanel.
-
-     panel = new MenuDrawingPanel(600, 600, this::myHandler);
+```
+   panel = new MenuDrawingPanel(600, 600, this::myHandler);
+```
 
 4. Use a lambda expression to represent your ActionListener. Your lambda could
 handle everything right there, or it could just call some other method to do the work.
 
-     panel = new MenuDrawingPanel(600, 600, (e) -> doWork(e); );
+```
+   panel = new MenuDrawingPanel(600, 600, (e) -> doWork(e); );
+```
 
 5. Create an inline, anonymous class that implements ActionListener. Your code would
 look like this:
 
-     panel = new MenuDrawingPanel(600, 600, new ActionListener() {
+```
+      panel = new MenuDrawingPanel(600, 600, new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             // do my event handling work here
          }
-       });
+      });
+```
 
 ### Ways to write a KeyListener
 Since the KeyListener interface has multiple methods, your choices are a bit more
@@ -184,16 +193,18 @@ limited. From above, you can only use 1, 2 and 5:
 4. Lambda Expressions WILL NOT WORK!! Cannot use them here.
 5. Create an inline, anonymous class
 
-##Mouse Click Event Handler
+## Mouse Click Event Handler
 There are two ways to get this done.
 1. Call the onClick method and pass in an event handler of type: DPMouseEventHandler.
 So, your code might look like this:
 
+```
      panel.onClick( (x, y) -> myMethod(x, y) ); // method 1
      panel.onClick( this::myMethod );           // method 2
+```
 
-Of course, you could use the more verbose methods presented above. You can create a object, implement the interface directly, and use inline, anonymous classes. But, these
-are long and a bit ugly.
+Of course, you could use the more verbose methods presented above. You can create a object, implement the interface directly, and use inline, anonymous classes. But, these are long and a bit ugly.
+
 2. Add a mouse listener to the panel. This means that you'd have to create a MouseListener
 interface implementation in the same way you might implement KeyListener mentioned above.
 The code for doing an inline, anonymous class would look like this:
