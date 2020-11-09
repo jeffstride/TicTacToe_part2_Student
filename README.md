@@ -35,7 +35,8 @@ Additional classes should be added to reduce the complexity of
 it all as well as to **REUSE** code from prior work completed. 
 For example, a Board class would be appropriate. <p>
 Suggested Steps are:
-   
+
+0. Do Thread Play
 1. Draw a TicTacToe board in the DrawingPane
 2. Modify/add custom menu options to the Frame
 3. Hook up event handler for custom menu
@@ -79,6 +80,103 @@ A lambda expression is short-hand syntax to create an anonymous method that
 is not really an object in and of itself. It is the implementation of the
 only method in the interface. The compiler does some trickery to tie the
 method implementation to an interface of some manufactured object.
+
+## Thread Play
+This section will guide the student through an exercise to help demonstrate
+how threads work.
+
+First, run the code without any changes. You'll notice that the drawing panel
+is created using the default constructor. In the console you'll see:
+```Main Thread is done!!```   
+<p>How could this be? The program is still running?<p>
+The answer is that when you create the drawing panel, another thread is
+created and all execution continues on that thread. The main thread dies.
+   Note that we will define a thread as follows:
+```
+   Definition of Thread: A path of execution with its own unique creation and termination. It remembers its own context. It may share instructions (code) with other threads. It may share variables/memory with other threads. There may be many threads in a single process.
+```
+Can we have the main thread stay alive and do more things while the other
+thread is running? Yes, we can. And, often times we should! Before we go
+too deeply, let's a few exercises that involve:
+
+1. Have the main thread wait for some period of time
+2. Setting up some menu items and event handlers
+3. Have the main thread do stuff while waiting
+4. Have the two threads talk to eachother
+
+### Passive Wait
+First: Let's have the main thread wait for a bit. We will do this by having it
+go to sleep. In the go() method, call passiveWait(). This method will call:
+    Thread.sleep(5000);
+    
+This will have the main thread sleep and stay alive for 5 seconds (5000 miliseconds).
+Sometimes, sleeping for a bit is a great thing to do. Let's keep going to learn more.
+
+### Add an Event Handler
+Using the information found in this readme, add an menu item, "Passive wait." When
+it is selected, have the thread wait for 30 seconds. As it is waiting, try selecting
+a different menu item. What is happening??<p>
+   
+The thread that calls the event handler is the UI thread (the DrawingPanel thread).
+When you have it wait, nothing can be drawn. Yuck!
+
+### Active Waiting
+Let's have the main thread wait until the UI thread triggers the main thread to die.
+In the go() method, instead of calling passiveWait(), call activeWait().
+Then, add another menu item, "Trigger" and create an event handler. When this
+event handler gets called, set "isTriggered = true". 
+The activeWait() method is actively counting forever until isTriggered. It moves
+quite quickly. All this activity takes brainpower away from the UI Thread.
+
+### Wait and Notify
+The best way to have the main thread wait for another thread is to use the wait/notify
+methods found on any object. In this case, we use the TicTacToe object, "this". In the
+go() method, instead of calling activeWait(), have it call waitForNotify(). Then, in the
+event handler for "Trigger", add or modify the code to have:
+```
+synchronized (this) {
+    this.notify();
+}
+```         
+This will cause the main thread to wait until it is notified. It is fast!
+
+### Why all of this?
+The reason we do this thread stuff is because UI will always require two threads. Doing
+all the work on the UI thread causes bugs. If you ever choose to do serverside website work, creating
+threads and working asynchronously is also extremely common.<p>
+   
+The last reason is because when we move to the next stage of Tic Tac Toe, you'll be
+given a framework that does thread synchronization.<p>
+
+In short... Because threads are cool! :-)
+
+## Adding Menu Items
+There is a method inside of MenuDrawingPanel that allows you to create extra
+menu items to be added to the menu. See:
+```
+public JMenu getCustomMenu()
+```
+The method getCustomMenu() is called to get a JMenu that contains the menu items
+you want to add to the menu. For each menu item, you need to set up an event handler.
+For consistency, it is recommended that you follow the same model provided and
+use the following to add the ActionListener:
+```
+item.addActionListener(e -> onItem(e));
+```
+This will result in the method onItem() inside of MenuDrawingPanel getting called, 
+which simply forwards it to the ActionListener provided when constructing the
+MenuDrawingPanel. So, in TicTacToe::go(), you'll have something like:
+```
+panel = new MenuDrawingPanel(600, 600, e -> onMenuItem(e));
+```
+Then, inside of the TicTacToe class, you can have a handler there:
+```
+private void onMenuItem(ActionEvent e) {
+    String cmd = e.getActionCommand();
+    if (cmd.equalsIgnoreCase("reset")) {
+        reset();
+    etc
+```
 
 ## Keyboard Functionality
 You can allow the user to type in a number/letter that represent a location
