@@ -1,3 +1,18 @@
+# Student Provided design
+
+This tables details the Roles & Responsibilities of the classes.
+
+Class Name | Does | HAS-A | IS-A
+--------------------------------
+TicTacToe | <role> | <has> | <is>
+DrawingPanel | <role> | <has> | <is>
+MenuDrawingPanel | <role> | <has> | <is>
+Board | <role> | <has> | <is>
+Move | <role> | <has> | <is>
+  
+Here is a UML diagram for the class design.
+![StudentDiagram](umlplaceholder.png)
+
 # TicTacToe_part2
 
 This project provides a simple template to do a graphical TicTacToe game.
@@ -25,6 +40,7 @@ Suggested Steps are:
 4. Hook up click event handler to receive user moves via click
 5. Hook up KeyPressed event handler
 6. Hook up mouse enter and mouse leave events
+7. Add your design to the top of this Readme file
 
 <p>
 Each of the above steps should be verified before moving on. First make use of
