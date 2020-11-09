@@ -1,4 +1,4 @@
-# Student Provided design
+# Student Provided Design
 
 This tables details the Roles & Responsibilities of the classes.
 
@@ -11,10 +11,11 @@ Board | role placeholder | has placeholder | is placeholder
 Move | role placeholder | has placeholder | is placeholder   
 
 
-Here is a UML diagram for the class design.
-![StudentDiagram](umlplaceholder.png)
+Here is a UML diagram for the class design. Update the diagram and/or link.
+You should use: https://app.diagrams.net/ to create the diagram.
+![StudentDiagram](UMLPlaceholder.PNG)
 
-# TicTacToe_part2
+# TicTacToe Instructions
 
 This project provides a simple template to do a graphical TicTacToe game.
 It uses a slightly modified UW DrawingPanel.
