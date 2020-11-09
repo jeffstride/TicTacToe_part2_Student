@@ -77,6 +77,9 @@ public class TicTacToe {
 
    private MenuDrawingPanel panel = null;
 
+   // NOTE: The keyword volatile. Look it up.
+   private volatile boolean isTriggered = false;
+   
    /**
     * Creates an instances and starts the game.
     * DO NOT MODIFY.
@@ -86,6 +89,8 @@ public class TicTacToe {
       
       TicTacToe ttt = new TicTacToe();
       ttt.go();
+      
+      System.out.println("Main Thread is done!!");
    }
    
    /**
@@ -99,7 +104,60 @@ public class TicTacToe {
     */
    public void go() {
    
-	   // DO LOTS OF WORK HERE!!
+	   panel = new MenuDrawingPanel();
+	   
+	   // This code is to demonstrate threads and waiting
+	   //passiveWait();
+	   //activeWait();
+	   //waitForNotify();
+	      
+	   // DO WORK HERE!!
    }
+   
+   // This method will force the current thread to wait
+   // until "this" has been notified.
+   // The student is to hook up an event handler that is
+   // triggered by a menu item selection.
+   // The event handler will notify "this".
+   // Thread the ReadMe.md for details.
+   private void waitForNotify() {
+	   synchronized(this) {
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	   }
+   }
+
+   // An active wait means that we never intentionally release
+   // our CPU time. We work and work and work...
+   // The student is to hook up an event handler that is
+   // triggered by a menu item selection.
+   // The event handler will set isTriggered to true.
+   private void activeWait() {
+	   long activeCount = 0;
+	   while (!isTriggered) {
+		   activeCount++;
+	   }
+	   
+	   System.out.println("Active Count = " + activeCount);
+   }
+
+   // This method will simply cause the current thread to 
+   // wait, passively, for 5 seconds. During that 5 seconds the
+   // thread relinquishes its CPU time to allow other threads
+   // to execute more quickly.
+   private void passiveWait() {
+	   // sleep for 5 seconds and let other threads have more time
+	   try {
+		   Thread.sleep(5000);
+	   } catch (InterruptedException e1) {
+		   e1.printStackTrace();
+	   }
+   }
+   
+   // Add methods here ...
+   
 
 }
