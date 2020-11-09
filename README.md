@@ -4,11 +4,11 @@ This tables details the Roles & Responsibilities of the classes.
 
 Class Name | Does | HAS-A | IS-A
 --------------------------------
-TicTacToe | <role> | <has> | <is>
-DrawingPanel | <role> | <has> | <is>
-MenuDrawingPanel | <role> | <has> | <is>
-Board | <role> | <has> | <is>
-Move | <role> | <has> | <is>
+TicTacToe | role placeholder | has placeholder | is placeholder
+DrawingPanel | role placeholder | has placeholder | is placeholder
+MenuDrawingPanel | role placeholder | has placeholder | is placeholder
+Board | role placeholder | has placeholder | is placeholder
+Move | role placeholder | has placeholder | is placeholder
   
 Here is a UML diagram for the class design.
 ![StudentDiagram](umlplaceholder.png)
