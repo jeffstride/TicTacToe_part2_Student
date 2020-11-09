@@ -77,7 +77,7 @@ public class TicTacToe {
 
    private MenuDrawingPanel panel = null;
 
-   // NOTE: The keyword volatile. Look it up.
+   // NOTE the keyword volatile. Look it up.
    private volatile boolean isTriggered = false;
    
    /**
